@@ -4,129 +4,95 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ASSEMBLANTE DOS REIS</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="icon" type="image/x/icon" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x/icon" href="assets/img/ass_logo1.png" />
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    @keyframes headerDrop {
-      0% {
-        transform: translateY(-20px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .animate-headerDrop {
-      animation: headerDrop 0.5s ease-out forwards;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 1s ease-out forwards;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-      animation: fadeIn 1s ease-out forwards;
-    }
-</style>
-
 </head>
-<body class="text-gray-800 bg-gray-50">
+<body class="body-main">
   
   <!-- HERO SLIDESHOW -->
-  <section class="relative h-screen overflow-hidden">
+  <section class="hero-section">
 
     <!-- Slides -->
-    <div id="slider" class="absolute inset-0 w-full h-full flex transition-transform duration-1000 ease-in-out">
-      <img src="assets/img/slide1.jpg" alt="Slide 1" class="w-full h-full object-cover flex-shrink-0">
-      <img src="assets/img/slide2.jpg" alt="Slide 2" class="w-full h-full object-cover flex-shrink-0">
-      <img src="assets/img/slide3.jpg" alt="Slide 3" class="w-full h-full object-cover flex-shrink-0">
+    <div id="slider" class="slider">
+      <img src="assets/img/slide1.jpg" alt="Slide 1" class="slide-img">
+      <img src="assets/img/slide2.jpg" alt="Slide 2" class="slide-img">
+      <img src="assets/img/slide3.jpg" alt="Slide 3" class="slide-img">
     </div>
 
     <!-- Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+    <div class="hero-overlay"></div>
 
     <!-- HEADER -->
-    <header  class="fixed w-full z-30 top-0 px-6 py-3 md:px-8 md:py-3 lg:px-12 xl:pl-14 bg-transparent">
-       <div class="flex items-center justify-between container mx-auto">
-        <a href="index.html" class="flex items-center space-x-2">
-          <img src="assets/img/ass_logo.png" alt="Logotipo da instituição" class="w-24 h-24 md:w-28 md:h-28">
+    <header class="header">
+       <div class="header-container">
+        <a href="index.html" class="logo-link">
+          <img src="assets/img/ass_logo1.png" alt="Logotipo da instituição" class="logo-img">
         </a>
 
         <!-- Menu Hamburguer Mobile -->
-        <div class="static md:hidden" x-data="{ open: false }">
+        <div class="mobile-menu-container" x-data="{ open: false }">
           <!-- Botão abrir -->
           <svg x-show="!open" @click="open = true" x-transition xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor" viewBox="0 0 24 24" class="absolute top-3 right-5 w-8 h-8 text-white">
+              fill="currentColor" viewBox="0 0 24 24" class="menu-icon menu-open">
             <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
           </svg>
 
           <!-- Botão fechar -->
           <svg x-show="open" @click="open = false" x-transition xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor" viewBox="0 0 24 24" class="absolute top-3 right-5 w-8 h-8 text-white">
+              fill="currentColor" viewBox="0 0 24 24" class="menu-icon menu-close">
             <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
           </svg>
 
           <!-- Menu Mobile -->
-          <nav class="hidden md:flex lg:text-lg space-x-8 text-white">
-            <a href="index.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Assemblante</a>
-            <a href="sobre.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Capitel</a>
-            <a href="galeria.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Galeria</a>
-            <a href="secretaria.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Sobre Nós</a>
-            <a href="secretaria.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Contacto</a>
+          <nav class="nav-mobile">
+            <a href="index.html" class="nav-link">Assemblante</a>
+            <a href="sobre.html" class="nav-link">Capitel</a>
+            <a href="galeria.html" class="nav-link">Galeria</a>
+            <a href="secretaria.html" class="nav-link">Sobre Nós</a>
+            <a href="secretaria.html" class="nav-link">Contacto</a>
           </nav>
 
         </div>
 
         <!-- Menu Desktop -->
-      <div class="hidden md:flex flex-1 justify-center">
-        <nav class="lg:text-lg space-x-8 text-white font-bold">
-          <a href="index.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Assemblante</a>
-          <a href="sobre.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Capitel</a>
-          <a href="galeria.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Galeria</a>
-          <a href="secretaria.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Sobre Nós</a>
-          <a href="secretaria.html" class="transition-all duration-300 hover:scale-105 hover:text-blue-300">Contacto</a>
+      <div class="nav-desktop-container">
+        <nav class="nav-desktop">
+          <a href="index.html" class="nav-link">Assemblante</a>
+          <a href="sobre.html" class="nav-link">Capitel</a>
+          <a href="galeria.html" class="nav-link">Galeria</a>
+          <a href="secretaria.html" class="nav-link">Sobre Nós</a>
+          <a href="secretaria.html" class="nav-link">Contacto</a>
         </nav>
       </div>
       </div>
     </header>
 
     <!-- Conteúdo central -->
-    <div class="relative z-20 flex flex-col justify-center items-center h-full text-center text-white px-4">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">Conectando Você ao Futuro</h1>
-      <p class="text-lg md:text-xl mb-6">Internet de alta velocidade para sua casa ou empresa</p>
-      <a href="#contato" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded transition duration-300 shadow-lg">Assine Agora</a>
+    <div class="hero-content">
+      <h1 class="hero-title">Conectando Você ao Futuro</h1>
+      <p class="hero-subtitle">Internet de alta velocidade para sua casa ou empresa</p>
+      <a href="#contato" class="hero-btn">Assine Agora</a>
     </div>
   </section>
 
 
   <!-- Sobre -->
-  <section id="sobre" class="bg-white lg:px-20 py-16">
-    <div class="container px-6 mx-auto">
-      <h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl text-center mb-12" data-aos="fade-up">
+  <section id="sobre" class="about-section">
+    <div class="container">
+      <h1 class="section-title" data-aos="fade-up">
         Quem somos <br />
       </h1>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="about-grid">
 
         <!-- Missão -->
-        <div class="space-y-3 transition duration-500 transform hover:scale- border-blue-400 border-2 border-blue-400 rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="200">
-          <span class="inline-block p-3 text-blue-500 bg-blue-100 rounded-full">
+        <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="card-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6"
+              class="icon"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -140,24 +106,21 @@
             </svg>
           </span>
 
-          <h1 class="text-xl font-semibold text-gray-700 capitalize">
+          <h1 class="card-title">
             Nossa Missão
           </h1>
 
-          <p class="text-gray-500 text-justify">
+          <p class="card-text">
             Nossa missão é conectar pessoas e empresas com internet
             de alta performance, promovendo inclusão digital e 
             facilitando a vida por meio de soluções tecnológicas acessíveis, 
             estáveis e seguras.
           </p>
 
-          <a
-            href="#"
-            class="inline-flex items-center -mx-1 text-sm text-blue-500 capitalize transition-colors duration-300 transform hover:underline hover:text-blue-600"
-          >
-          <span class="mx-1">ler mais</span>
+          <a href="#" class="card-link">
+          <span class="link-text">ler mais</span>
             <svg
-              class="w-4 h-4 mx-1 rtl:-scale-x-100"
+              class="link-icon"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -172,11 +135,11 @@
 
 
         <!-- Visão -->
-        <div class="space-y-3 transition duration-500 transform hover:scale- border-blue-400 border-2 border-blue-400 rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="200">
-           <span class="inline-block p-3 text-blue-500 bg-blue-100 rounded-full">
+        <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+           <span class="card-icon">
               <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6"
+              class="icon"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -190,24 +153,21 @@
             </svg>
           </span>
 
-          <h1 class="text-xl font-semibold text-gray-700 capitalize">
+          <h1 class="card-title">
             Nossa Missão
           </h1>
 
-          <p class="text-gray-500 text-justify">
+          <p class="card-text">
             Ser reconhecida como a empresa líder em conectividade 
             no país, referência em inovação, qualidade no atendimento 
             e compromisso com a transformação digital nas comunidades 
             que atendemos.
           </p>
 
-          <a
-            href="#"
-            class="inline-flex items-center -mx-1 text-sm text-blue-500 capitalize transition-colors duration-300 transform hover:underline hover:text-blue-600"
-          >
-          <span class="mx-1">ler mais</span>
+          <a href="#" class="card-link">
+          <span class="link-text">ler mais</span>
             <svg
-              class="w-4 h-4 mx-1 rtl:-scale-x-100"
+              class="link-icon"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -221,11 +181,11 @@
         </div>
 
         <!-- Valores -->
-         <div class="space-y-3 transition duration-500 transform hover:scale- border-blue-400 border-2 border-blue-400 rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.03]" data-aos="fade-up" data-aos-delay="200">
-          <span class="inline-block p-3 text-blue-500 bg-blue-100 rounded-full">
+         <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="card-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6"
+              class="icon"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -239,23 +199,20 @@
             </svg>
           </span>
 
-          <h1 class="text-xl font-semibold text-gray-700 capitalize">
+          <h1 class="card-title">
             Valores
           </h1>
 
-          <p class="text-gray-500 text-justify">
+          <p class="card-text">
              Compromisso com a transparência, respeito aos clientes, 
              integridade, foco na inovação, responsabilidade social 
              e busca constante por excelência nos serviços prestados.
           </p>
 
-          <a
-            href="#"
-            class="inline-flex items-center -mx-1 text-sm text-blue-500 capitalize transition-colors duration-300 transform hover:underline hover:text-blue-600"
-          >
-          <span class="mx-1">ler mais</span>
+          <a href="#" class="card-link">
+          <span class="link-text">ler mais</span>
             <svg
-              class="w-4 h-4 mx-1 rtl:-scale-x-100"
+              class="link-icon"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -274,20 +231,20 @@
 
 
   <!-- Serviços -->
-  <section id="servicos" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-3xl font-semibold mb-8 text-center">Nossos Serviços</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 border rounded shadow">
-          <h4 class="text-xl font-bold mb-2">Venda de Imóveis</h4>
+  <section id="servicos" class="services-section">
+    <div class="services-container">
+      <h3 class="services-title">Nossos Serviços</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <h4 class="service-title">Venda de Imóveis</h4>
           <p>Intermediação de imóveis residenciais e comerciais com segurança e agilidade.</p>
         </div>
-        <div class="p-6 border rounded shadow">
-          <h4 class="text-xl font-bold mb-2">Administração</h4>
+        <div class="service-card">
+          <h4 class="service-title">Administração</h4>
           <p>Gestão de aluguéis, contratos, e assistência a inquilinos e proprietários.</p>
         </div>
-        <div class="p-6 border rounded shadow">
-          <h4 class="text-xl font-bold mb-2">Consultoria</h4>
+        <div class="service-card">
+          <h4 class="service-title">Consultoria</h4>
           <p>Aconselhamento estratégico para investidores e proprietários de imóveis.</p>
         </div>
       </div>
@@ -295,20 +252,20 @@
   </section>
 
   <!-- Contato -->
-  <section id="contato" class="py-16 bg-blue-50">
-    <div class="max-w-4xl mx-auto px-4">
-      <h3 class="text-3xl font-semibold mb-8 text-center">Entre em Contato</h3>
-      <form class="space-y-4">
-        <input type="text" placeholder="Nome" class="w-full p-3 border rounded" required />
-        <input type="email" placeholder="Email" class="w-full p-3 border rounded" required />
-        <textarea placeholder="Mensagem" class="w-full p-3 border rounded h-32" required></textarea>
-        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Enviar</button>
+  <section id="contato" class="contact-section">
+    <div class="contact-container">
+      <h3 class="contact-title">Entre em Contato</h3>
+      <form class="contact-form">
+        <input type="text" placeholder="Nome" class="form-input" required />
+        <input type="email" placeholder="Email" class="form-input" required />
+        <textarea placeholder="Mensagem" class="form-textarea" required></textarea>
+        <button type="submit" class="form-btn">Enviar</button>
       </form>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-white text-center text-sm text-gray-500 py-6">
+  <footer class="footer">
     © 2025 Assemblante. Todos os direitos reservados.
   </footer>
 
