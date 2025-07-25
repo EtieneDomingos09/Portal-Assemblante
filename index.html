@@ -1,296 +1,902 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASSEMBLANTE DOS REIS</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x/icon" href="assets/img/ass_logo1.png" />
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-</head>
-<body class="body-main">
-  
-  <!-- HERO SLIDESHOW -->
-  <section class="hero-section">
-
-    <!-- Slides -->
-    <div id="slider" class="slider">
-      <img src="assets/img/slide1.jpg" alt="Slide 1" class="slide-img">
-      <img src="assets/img/slide2.jpg" alt="Slide 2" class="slide-img">
-      <img src="assets/img/slide3.jpg" alt="Slide 3" class="slide-img">
-    </div>
-
-    <!-- Overlay -->
-    <div class="hero-overlay"></div>
-
-    <!-- HEADER -->
-    <header class="header">
-       <div class="header-container">
-        <a href="index.html" class="logo-link">
-          <img src="assets/img/ass_logo1.png" alt="Logotipo da instituição" class="logo-img">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Internet rápida e confiável na Urbanização do Kalawenda. Instalação por apenas 65.000 AOA com IPTV Grátis. Mais de 100 clientes satisfeitos."
+    />
+    <link rel="icon" type="image/x-icon" href="assets/img/ass_logo1.png" />
+    <title>Assemblante - Tecnologia de Informação</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome para os ícones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- HEADER RESPONSIVO -->
+    <header class="header" id="header">
+      <div class="header-container">
+        <a href="#" class="logo-link">
+          <img
+            src="assets/img/ass_logo.png"
+            alt="Assemblante Logo"
+            class="logo-img"
+          />
         </a>
 
-        <!-- Menu Hamburguer Mobile -->
-        <div class="mobile-menu-container" x-data="{ open: false }">
-          <!-- Botão abrir -->
-          <svg x-show="!open" @click="open = true" x-transition xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor" viewBox="0 0 24 24" class="menu-icon menu-open">
-            <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-          </svg>
-
-          <!-- Botão fechar -->
-          <svg x-show="open" @click="open = false" x-transition xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor" viewBox="0 0 24 24" class="menu-icon menu-close">
-            <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-          </svg>
-
-          <!-- Menu Mobile -->
-          <nav class="nav-mobile">
-            <a href="index.html" class="nav-link">Assemblante</a>
-            <a href="sobre.html" class="nav-link">Capitel</a>
-            <a href="galeria.html" class="nav-link">Galeria</a>
-            <a href="secretaria.html" class="nav-link">Sobre Nós</a>
-            <a href="secretaria.html" class="nav-link">Contacto</a>
-          </nav>
-
-        </div>
-
-        <!-- Menu Desktop -->
-      <div class="nav-desktop-container">
         <nav class="nav-desktop">
-          <a href="index.html" class="nav-link">Assemblante</a>
-          <a href="sobre.html" class="nav-link">Capitel</a>
-          <a href="galeria.html" class="nav-link">Galeria</a>
-          <a href="secretaria.html" class="nav-link">Sobre Nós</a>
-          <a href="secretaria.html" class="nav-link">Contacto</a>
+          <a href="#home" class="nav-link active">Início</a>
+          <a href="#planos" class="nav-link">Planos</a>
+          <a href="#servicos" class="nav-link">Serviços</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+          <a href="#contato" class="nav-link">Contato</a>
         </nav>
-      </div>
+
+        <a href="#login" class="login-btn hide-on-mobile">Login</a>
+
+        <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Menu">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </button>
+
+        <nav class="nav-mobile" id="mobile-menu">
+          <a href="#home" class="nav-link">Início</a>
+          <a href="#planos" class="nav-link">Planos</a>
+          <a href="#servicos" class="nav-link">Serviços</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+          <a href="#contato" class="nav-link">Contato</a>
+          <a href="#login" class="nav-link login-mobile-btn">Login</a>
+        </nav>
       </div>
     </header>
 
-    <!-- Conteúdo central -->
-    <div class="hero-content">
-      <h1 class="hero-title">Conectando Você ao Futuro</h1>
-      <p class="hero-subtitle">Internet de alta velocidade para sua casa ou empresa</p>
-      <a href="#contato" class="hero-btn">Assine Agora</a>
-    </div>
-  </section>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-gradient">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">
+              Internet rápida e confiável na Urbanização do Kalawenda
+            </h1>
+            <p class="hero-subtitle">
+              Instalação por apenas
+              <span class="price-highlight">65.000 AOA</span> com
+              <span class="price-highlight">IPTV Grátis</span>
+            </p>
+            <div class="testimonials">
+              <div class="testimonial-content">
+                <p class="testimonial-text">
+                  Mais de 100 moradores satisfeitos conectados
+                </p>
+                <div class="rating">
+                  <i class="fas fa-star star"></i>
+                  <i class="fas fa-star star"></i>
+                  <i class="fas fa-star star"></i>
+                  <i class="fas fa-star star"></i>
+                  <i class="fas fa-star star"></i>
+                  <span class="rating-text">4.9/5</span>
+                </div>
+              </div>
+            </div>
+            <a
+              href="https://wa.me/244954221694?text=Ol%C3%A1%2C%20quero%20contratar%20a%20instala%C3%A7%C3%A3o%20da%20internet%20na%20Urbaniza%C3%A7%C3%A3o%20do%20Kalawenda"
+              target="_blank"
+              class="cta-button"
+            >
+              Quero Me Conectar
+            </a>
+          </div>
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+              alt="Internet rápida"
+              class="hero-img"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- SEÇÃO DE PLANOS -->
+    <section id="planos" class="plans-section">
+      <div class="container">
+        <div class="plans-header">
+          <h2 class="section-title">Nossos Planos de Internet</h2>
+          <p class="section-subtitle">
+            Escolha o plano perfeito para suas necessidades. Todos os planos
+            incluem tráfego ilimitado e suporte 24/7.
+          </p>
+        </div>
 
-  <!-- Sobre -->
-  <section id="sobre" class="about-section">
-    <div class="container">
-      <h1 class="section-title" data-aos="fade-up">
-        Quem somos <br />
-      </h1>
-
-      <div class="about-grid">
-
-        <!-- Missão -->
-        <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-          <span class="card-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        <div class="plans-grid">
+          <!-- Plano 1 -->
+          <div class="plan-card">
+            <div class="plan-content">
+              <div class="plan-header">
+                <h3 class="plan-speed">4 Mbps</h3>
+                <p class="plan-description">Para redes sociais e e-mails</p>
+                <div class="plan-price">
+                  15.000 AOA<span class="price-period">/mês</span>
+                </div>
+              </div>
+              <ul class="plan-features">
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Download: 4 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Upload: 2 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Até 2 usuários</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Tráfego ilimitado</span>
+                </li>
+              </ul>
+              <a
+                href="#"
+                class="plan-button"
               >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                Quero Assinar
+              </a>
+            </div>
+          </div>
+
+          <!-- Plano 2 -->
+          <div class="plan-card">
+            <div class="plan-content">
+              <div class="plan-header">
+                <h3 class="plan-speed">6 Mbps</h3>
+                <p class="plan-description">Para YouTube e Netflix</p>
+                <div class="plan-price">
+                  17.982 kZ<span class="price-period">/mês</span>
+                </div>
+              </div>
+              <ul class="plan-features">
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Download: 6 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Upload: 3 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Até 6 usuários</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Tráfego ilimitado</span>
+                </li>
+              </ul>
+              <a
+                href="#"
+                class="plan-button"
+              >
+                Quero Assinar
+              </a>
+            </div>
+          </div>
+
+          <!-- Plano 3 -->
+          <div class="plan-card">
+            <div class="plan-content">
+              <div class="plan-header">
+                <h3 class="plan-speed">8 Mbps</h3>
+                <p class="plan-description">Ultra performance</p>
+                <div class="plan-price">
+                  21 550 Kz<span class="price-period">/mês</span>
+                </div>
+              </div>
+              <ul class="plan-features">
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Download: 8 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Upload: 4 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Até 12 usuários</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Tráfego ilimitado</span>
+                </li>
+              </ul>
+              <a
+                href="#"
+                class="plan-button"
+              >
+                Quero Assinar
+              </a>
+            </div>
+          </div>
+
+          <!-- Plano 4 (Destaque) -->
+          <div class="plan-card plan-featured">
+            <div class="featured-badge">MAIS POPULAR</div>
+            <div class="plan-content">
+              <div class="plan-header">
+                <h3 class="plan-speed">10 Mbps</h3>
+                <p class="plan-description">
+                  Para chamadas de vídeo e streaming
+                </p>
+                <div class="plan-price">
+                  25.000 AOA<span class="price-period">/mês</span>
+                </div>
+              </div>
+              <ul class="plan-features">
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Download: 10 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Upload: 6 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Até 8 usuários</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Tráfego ilimitado</span>
+                </li>
+              </ul>
+              <a
+                href="#"
+                class="plan-button plan-button-featured"
+              >
+                Quero Assinar
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="plans-footer">
+          <p class="footer-text">
+            Não encontrou o que procura? Temos mais opções disponíveis!
+          </p>
+          <a href="#contato" class="footer-link"
+            >Fale conosco para um plano personalizado</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO FAQ -->
+    <section id="faq" class="faq-section">
+      <div class="container">
+        <div class="faq-header">
+          <h2 class="section-title">Perguntas Frequentes</h2>
+          <p class="section-subtitle">
+            Tire suas dúvidas sobre nossos serviços de internet na Urbanização
+            do Kalawenda
+          </p>
+        </div>
+
+        <div class="faq-container">
+          <div class="faq-item" data-faq="1">
+            <div class="faq-question">
+              <h3>Como funciona a instalação da internet?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Nossa equipe técnica agenda uma visita ao seu imóvel na
+                Urbanização do Kalawenda para realizar a instalação completa. O
+                processo inclui a instalação do equipamento, configuração da
+                rede Wi-Fi e teste de velocidade. Todo o processo leva em média
+                2-3 horas e você já sai com internet funcionando.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq="2">
+            <div class="faq-question">
+              <h3>Qual é o prazo para instalação após a contratação?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Após a contratação via WhatsApp, nossa equipe entra em contato
+                em até 24 horas para agendar a instalação. O prazo médio de
+                instalação é de 2 a 5 dias úteis, dependendo da disponibilidade
+                de horário e das condições técnicas do local.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq="5">
+            <div class="faq-question">
+              <h3>Existe limite de tráfego ou franquia de dados?</h3>
+              <div class="faq-icon">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Não! Todos os nossos planos oferecem tráfego completamente
+                ilimitado. Você pode navegar, assistir vídeos, fazer download e
+                usar suas redes sociais à vontade, sem se preocupar com limites
+                ou taxas extras por uso excessivo.
+              </p>
+            </div>
+          </div>
+
+        <div class="faq-footer">
+          <p class="footer-text">Ainda tem dúvidas?</p>
+          <a href="#contato" class="faq-contact-btn">
+            Fale Conosco no WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO CONTATO -->
+    <section id="contato" class="contact-section">
+      <div class="container">
+        <div class="contact-content">
+          <div class="contact-info">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="contact-description">
+              Tem dúvidas ou quer contratar nossos serviços? Preencha o
+              formulário ou fale conosco diretamente pelo WhatsApp.
+            </p>
+
+            <div class="contact-details">
+              <h3 class="details-title">Informações de Contato</h3>
+              <ul class="contact-list">
+                <li class="contact-item">
+                  <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <span>Luanda_Cazenga, Urbanização Kalawenda, Edificio 22 | Apt. Nº14</span>
+                </li>
+                <li class="contact-item">
+                  <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <span>+244 954 221 694</span>
+                </li>
+                <li class="contact-item">
+                  <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <span>assemblantedosreis@gmail.com</span>
+                </li>
+                <li class="contact-item">
+                  <div class="contact-icon">
+                    <i class="fab fa-whatsapp"></i>
+                  </div>
+                  <span>+244 972 906 378</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="social-links">
+              <a href="#" class="social-link facebook" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link instagram" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link twitter" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link linkedin" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form-container">
+            <form id="contactForm" class="contact-form">
+              <div class="form-group">
+                <label for="name" class="form-label">Nome Completo</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="form-input"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="whatsapp" class="form-label"
+                  >Número de WhatsApp</label
+                >
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  required
+                  class="form-input"
+                  placeholder="+244 XXX XXX XXX"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="location" class="form-label"
+                  >Localização na Urbanização</label
+                >
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  required
+                  class="form-input"
+                  placeholder="Ex: Rua 5, Edificio 22, Apt. 14"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="plan" class="form-label">Plano de Interesse</label>
+                <select id="plan" name="plan" class="form-select">
+                  <option value="">Selecione um plano</option>
+                  <option value="4 Mbps">4 Mbps - 15.000 Kz</option>
+                  <option value="6 Mbps">6 Mbps - 17.982 kz</option>
+                  <option value="8 Mbps">
+                    8 Mbps - 21.550 Kz
+                  </option>
+                  <option value="10 Mbps">10 Mbps - 25.000 Kz (Mais Popular)</option>
+                  <option value="IPTV">IPTV - Grátis com instalação</option>
+                  <option value="Instalação">Instalação - 65.000 Kz</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label"
+                  >Mensagem (Opcional)</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  class="form-textarea"
+                  placeholder="Conte-nos mais sobre suas necessidades..."
+                ></textarea>
+              </div>
+
+              <button
+                type="button"
+                onclick="sendWhatsAppMessage()"
+                class="form-submit"
+              >
+                Enviar Mensagem via WhatsApp
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+     <footer class="footer">
+      <div class="footer-content">
+        <div class="container">
+          <div class="footer-main">
+            <!-- Coluna 1: Logo e Descrição -->
+            <div class="footer-column footer-brand">
+              <img
+                src="assets/img/ass_logo.png"
+                alt="Assemblante Logo"
+                class="footer-logo"
               />
-            </svg>
-          </span>
+              <p class="footer-description">
+                Conectando a Urbanização do Kalawenda com internet de alta
+                qualidade. Mais de 100 famílias já confiam em nossos serviços.
+              </p>
+              <div class="footer-stats">
+                <div class="stat-item">
+                  <span class="stat-number">100+</span>
+                  <span class="stat-label">Clientes Satisfeitos</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">24/7</span>
+                  <span class="stat-label">Suporte Técnico</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">99%</span>
+                  <span class="stat-label">Uptime</span>
+                </div>
+              </div>
+            </div>
 
-          <h1 class="card-title">
-            Nossa Missão
-          </h1>
+            <!-- Coluna 2: Links Rápidos -->
+            <div class="footer-column">
+              <h4 class="footer-title">Links Rápidos</h4>
+              <ul class="footer-links">
+                <li><a href="#home" class="footer-link">Início</a></li>
+                <li><a href="#planos" class="footer-link">Nossos Planos</a></li>
+                <li>
+                  <a href="#faq" class="footer-link">Perguntas Frequentes</a>
+                </li>
+                <li><a href="#contato" class="footer-link">Contato</a></li>
+              </ul>
+            </div>
 
-          <p class="card-text">
-            Nossa missão é conectar pessoas e empresas com internet
-            de alta performance, promovendo inclusão digital e 
-            facilitando a vida por meio de soluções tecnológicas acessíveis, 
-            estáveis e seguras.
-          </p>
+            <!-- Coluna 3: Serviços -->
+            <div class="footer-column">
+              <h4 class="footer-title">Nossos Serviços</h4>
+              <ul class="footer-links">
+                <li>
+                  <a href="#" class="footer-link">Internet Residencial</a>
+                </li>
+                <li><a href="#" class="footer-link">IPTV Grátis</a></li>
+                <li><a href="#" class="footer-link">Instalação Técnica</a></li>
+                <li><a href="#" class="footer-link">Suporte 24/7</a></li>
+                <li>
+                  <a href="#" class="footer-link">Manutenção Preventiva</a>
+                </li>
+              </ul>
+            </div>
 
-          <a href="#" class="card-link">
-          <span class="link-text">ler mais</span>
-            <svg
-              class="link-icon"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-            <path
-              fill-rule="evenodd"
-              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-            </svg>
-          </a>
-        </div>
+            <!-- Coluna 4: Contato e CTA -->
+            <div class="footer-column footer-contact">
+              <h4 class="footer-title">Fale Conosco</h4>
+              <div class="footer-contact-info">
+                <div class="contact-item-footer">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Urbanização do Kalawenda<br />Luanda, Angola</span>
+                </div>
+                <div class="contact-item-footer">
+                  <i class="fas fa-phone-alt"></i>
+                  <span>+244 972 906 378</span>
+                </div>
+                <div class="contact-item-footer">
+                  <i class="fas fa-envelope"></i>
+                  <span>assemblantedosreis@gmail.com</span>
+                </div>
+              </div>
 
+              <a
+                href="https://wa.me/244954221694?text=Ol%C3%A1%2C%20quero%20contratar%20a%20instala%C3%A7%C3%A3o%20da%20internet%20na%20Urbaniza%C3%A7%C3%A3o%20do%20Kalawenda"
+                target="_blank"
+                class="footer-cta"
+              >
+                <i class="fab fa-whatsapp"></i>
+                <span>Contrate Agora</span>
+              </a>
 
-        <!-- Visão -->
-        <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-           <span class="card-icon">
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-            />
-            </svg>
-          </span>
-
-          <h1 class="card-title">
-            Nossa Missão
-          </h1>
-
-          <p class="card-text">
-            Ser reconhecida como a empresa líder em conectividade 
-            no país, referência em inovação, qualidade no atendimento 
-            e compromisso com a transformação digital nas comunidades 
-            que atendemos.
-          </p>
-
-          <a href="#" class="card-link">
-          <span class="link-text">ler mais</span>
-            <svg
-              class="link-icon"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-            <path
-              fill-rule="evenodd"
-              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Valores -->
-         <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-          <span class="card-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-            />
-            </svg>
-          </span>
-
-          <h1 class="card-title">
-            Valores
-          </h1>
-
-          <p class="card-text">
-             Compromisso com a transparência, respeito aos clientes, 
-             integridade, foco na inovação, responsabilidade social 
-             e busca constante por excelência nos serviços prestados.
-          </p>
-
-          <a href="#" class="card-link">
-          <span class="link-text">ler mais</span>
-            <svg
-              class="link-icon"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-            <path
-              fill-rule="evenodd"
-              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-            </svg>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Serviços -->
-  <section id="servicos" class="services-section">
-    <div class="services-container">
-      <h3 class="services-title">Nossos Serviços</h3>
-      <div class="services-grid">
-        <div class="service-card">
-          <h4 class="service-title">Venda de Imóveis</h4>
-          <p>Intermediação de imóveis residenciais e comerciais com segurança e agilidade.</p>
-        </div>
-        <div class="service-card">
-          <h4 class="service-title">Administração</h4>
-          <p>Gestão de aluguéis, contratos, e assistência a inquilinos e proprietários.</p>
-        </div>
-        <div class="service-card">
-          <h4 class="service-title">Consultoria</h4>
-          <p>Aconselhamento estratégico para investidores e proprietários de imóveis.</p>
+              <div class="footer-social">
+                <span class="social-text">Siga-nos:</span>
+                <div class="social-links-footer">
+                  <a
+                    href="#"
+                    class="social-link-footer facebook"
+                    aria-label="Facebook"
+                  >
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-link-footer instagram"
+                    aria-label="Instagram"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-link-footer twitter"
+                    aria-label="Twitter"
+                  >
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-link-footer linkedin"
+                    aria-label="LinkedIn"
+                  >
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Contato -->
-  <section id="contato" class="contact-section">
-    <div class="contact-container">
-      <h3 class="contact-title">Entre em Contato</h3>
-      <form class="contact-form">
-        <input type="text" placeholder="Nome" class="form-input" required />
-        <input type="email" placeholder="Email" class="form-input" required />
-        <textarea placeholder="Mensagem" class="form-textarea" required></textarea>
-        <button type="submit" class="form-btn">Enviar</button>
-      </form>
-    </div>
-  </section>
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="footer-bottom-content">
+            <div class="footer-legal">
+              <p>
+                &copy; 2025 Assemblante - Tecnologia de Informação. Todos os
+                direitos reservados.
+              </p>
+              <div class="footer-legal-links">
+                <a href="#" class="legal-link">Política de Privacidade</a>
+                <span class="separator">|</span>
+                <a href="#" class="legal-link">Termos de Uso</a>
+                <span class="separator">|</span>
+                <a href="#" class="legal-link">Suporte</a>
+              </div>
+            </div>
+            <div class="footer-badge">
+              <span class="badge-text">Kalawenda</span>
+              <i class="fas fa-wifi"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="footer">
-    © 2025 Assemblante. Todos os direitos reservados.
-  </footer>
+    <!-- SCRIPTS -->
+    <script>
+      const toggleBtn = document.getElementById("mobile-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const header = document.getElementById("header");
 
-  <!-- Scripts -->
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    });
-  </script>
+      // Menu mobile toggle
+      toggleBtn.addEventListener("click", () => {
+        toggleBtn.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+      });
 
-  <script>
-    const slider = document.getElementById('slider');
-    let index = 0;
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
 
-    setInterval(() => {
-      index = (index + 1) % slider.children.length;
-      slider.style.transform = `translateX(-${index * 100}%)`;
-    }, 4000); // muda a cada 4 segundos
-  </script>
+      // Smooth scroll para links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
+      // Animação dos cards de planos
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
 
-</body>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationDelay =
+              entry.target.dataset.delay || "0ms";
+            entry.target.classList.add("animate-in");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".plan-card").forEach((card, index) => {
+        card.dataset.delay = `${index * 100}ms`;
+        observer.observe(card);
+      });
+
+      // FAQ Accordion functionality
+      document.querySelectorAll(".faq-question").forEach((question) => {
+        question.addEventListener("click", () => {
+          const faqItem = question.closest(".faq-item");
+          const isActive = faqItem.classList.contains("active");
+
+          // Fechar todos os outros FAQs
+          document.querySelectorAll(".faq-item").forEach((item) => {
+            if (item !== faqItem) {
+              item.classList.remove("active");
+            }
+          });
+
+          // Toggle do FAQ atual
+          if (isActive) {
+            faqItem.classList.remove("active");
+          } else {
+            faqItem.classList.add("active");
+          }
+        });
+      });
+
+      // Fechar FAQ ao clicar fora
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".faq-item")) {
+          document.querySelectorAll(".faq-item").forEach((item) => {
+            item.classList.remove("active");
+          });
+        }
+      });
+
+      // Animação de entrada da seção FAQ
+      const faqObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.style.animation =
+                  "fadeInUp 0.6s ease-out forwards";
+              }, index * 100);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        faqObserver.observe(item);
+      });
+
+      // Função para enviar mensagem via WhatsApp
+          function sendWhatsAppMessage() {
+          // Constantes de configuração
+          const WHATSAPP_NUMBER = "244954221694";
+          const COMPANY_LOCATION = "Urbanização do Kalawenda";
+          
+          try {
+              // Obter elementos do formulário
+              const form = document.getElementById("contactForm");
+              const elements = {
+                  name: document.getElementById("name"),
+                  whatsapp: document.getElementById("whatsapp"),
+                  location: document.getElementById("location"),
+                  plan: document.getElementById("plan"),
+                  message: document.getElementById("message")
+              };
+
+              // Verificar se todos os elementos existem
+              for (const [key, element] of Object.entries(elements)) {
+                  if (!element) {
+                      throw new Error(`Elemento '${key}' não encontrado`);
+                  }
+              }
+
+              // Obter valores e sanitizar
+              const data = {
+                  name: elements.name.value.trim(),
+                  whatsapp: elements.whatsapp.value.trim(),
+                  location: elements.location.value.trim(),
+                  plan: elements.plan.value,
+                  message: elements.message.value.trim()
+              };
+
+              // Validação básica
+              if (!data.name || !data.whatsapp || !data.location) {
+                  alert("Por favor, preencha todos os campos obrigatórios.");
+                  return;
+              }
+
+              // Validação aprimorada do WhatsApp
+              const whatsappRegex = /^(\+?244|244)?[\s-]?[0-9]{3}[\s-]?[0-9]{3}[\s-]?[0-9]{3}$/;
+              const cleanWhatsapp = data.whatsapp.replace(/[\s-]/g, "");
+              
+              if (!whatsappRegex.test(data.whatsapp)) {
+                  alert("Por favor, insira um número de WhatsApp válido (formato: 244 9XX XXX XXX).");
+                  return;
+              }
+
+              // Construir mensagem
+              let whatsappMessage = `Olá! Meu nome é ${data.name} e gostaria de contratar internet na ${COMPANY_LOCATION}.\n\n`;
+              whatsappMessage += `📍 *Localização:* ${data.location}\n`;
+              whatsappMessage += `📱 *WhatsApp:* ${data.whatsapp}\n`;
+
+              if (data.plan) {
+                  whatsappMessage += `📋 *Plano de interesse:* ${data.plan}\n`;
+              }
+
+              if (data.message) {
+                  whatsappMessage += `💬 *Mensagem adicional:* ${data.message}\n`;
+              }
+
+              whatsappMessage += `\nAguardo contato para agendar a instalação. Obrigado!`;
+
+              // Criar URL do WhatsApp
+              const encodedMessage = encodeURIComponent(whatsappMessage);
+              const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+              // Abrir WhatsApp
+              window.open(whatsappURL, "_blank");
+
+              // Feedback visual
+              showSuccessFeedback(form);
+
+          } catch (error) {
+              console.error("Erro ao enviar mensagem:", error);
+              alert("Ocorreu um erro ao processar sua solicitação. Tente novamente.");
+          }
+      }
+
+      // Função auxiliar para feedback visual
+      function showSuccessFeedback(form) {
+          const submitBtn = document.querySelector(".form-submit");
+          if (!submitBtn) return;
+
+          const originalText = submitBtn.innerHTML;
+          const originalBackground = submitBtn.style.background;
+
+          submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Mensagem Enviada!';
+          submitBtn.style.background = "#28a745";
+          submitBtn.disabled = true;
+
+          setTimeout(() => {
+              submitBtn.innerHTML = originalText;
+              submitBtn.style.background = originalBackground;
+              submitBtn.disabled = false;
+              form.reset();
+          }, 3000);
+      }
+      // Formatação automática do número de WhatsApp
+      document
+        .getElementById("whatsapp")
+        .addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "");
+
+          if (value.length > 0) {
+            if (value.startsWith("244")) {
+              value = "+" + value;
+            } else if (!value.startsWith("+244")) {
+              value = "+244" + value;
+            }
+          }
+
+          e.target.value = value;
+        });
+
+      // Animação de entrada da seção de contato
+      const contactObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document
+        .querySelectorAll(".contact-info, .contact-form-container")
+        .forEach((item) => {
+          contactObserver.observe(item);
+        });
+
+      // Efeitos visuais nos inputs
+      document
+        .querySelectorAll(".form-input, .form-select, .form-textarea")
+        .forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.parentElement.classList.add("focused");
+          });
+
+          input.addEventListener("blur", function () {
+            this.parentElement.classList.remove("focused");
+          });
+        });
+    </script>
+  </body>
 </html>
