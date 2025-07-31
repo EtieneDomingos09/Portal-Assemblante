@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-----==========CSS ==========-------->
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+     <!--======== FAVICON =========----- -->
+     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <title> Login da Plataforma da Assemblante</title>
+    <!-- Biblioteca sweetalert2 -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <img class="headerImge" src="/assets/img/ass_logo1.png" alt="logo Assemblante">
+    </header>
+
+    <main>
+        <img src="/assets/img/Ass_login.png" alt="logo Assemblante" class="logo">
+
+        <h1> Inicie sessão <span class="inicie">com a sua conta</span></h1>
+
+        <form class="form" id="loginForm" method="POST">
+            <div class="email">
+                <input type="email" name="email" id="emailInput" placeholder="Email" required>
+            </div>
+
+            <div class="password" id="password" style="display: none;">
+                <input type="password" name="senha" id="senhaInput" placeholder="Palavra-passe">
+                <img src="img/arrows.png" alt="seta" class="seta">
+            </div>
+
+            <!-- Botão oculto, necessário para submeter com Enter -->
+            <button type="submit" class="btn"></button>
+
+        </form>
+
+        <div class="check">
+            <input type="checkbox" id="remember" name="remember" value="remember">
+                <label for="remember">Guardar a sessão</label>
+        </div>
+        
+        <a href="esqueciSenha.php">Esqueceu-se à palavra-passe</a>
+        <a href="/src/login/escolhaEmpresa.html">Voltar atrás</a>
+       
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="row">
+            <a href="#">Politica de Privacidade</a>
+
+            <a href="#">Termos de Uso</a>
+
+            <a href="#">Status</a>
+        </div>
+        <p>2025 Assemblante. Todos os direitos reservados.</p>
+    </footer>
+    
+</body>
+<script src="js/index.js" ></script>
+</html>

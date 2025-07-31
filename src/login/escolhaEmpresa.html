@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-----==========CSS ==========-------->
+    <link rel="stylesheet" type="text/css" href="css/escolhaEmpresa.css" />
+    <title>Escolha a Empresa</title>
+  </head>
+
+  <body>
+    <header>
+      <img
+        class="headerImge"
+        src="/assets/img/ass_logo1.png"
+        alt="logo Assemblante"
+      />
+    </header>
+
+    <main>
+      <img
+        src="/assets/img/Ass_login.png"
+        alt="logo Assemblante"
+        class="logo"
+      />
+
+      <h1>
+        Selecione a Empresa <span class="inicie">que pretende aceder</span>
+      </h1>
+
+      <form class="check">
+        <div class="EMPRESA">
+          <input
+            type="radio"
+            id="assemblantes"
+            name="empresa"
+            value="ASSEMBLANTE DOS REIS"
+            checked
+          />
+          <label for="assemblantes">ASSEMBLANTE DOS REIS</label>
+        </div>
+
+        <div class="EMPRESA">
+          <input
+            type="radio"
+            id="capitel"
+            name="empresa"
+            value="CAPITEL PROJECTO E FISCALIZAÇÃO DE OBRAS, LDA"
+          />
+          <label for="capitel"
+            >CAPITEL PROJECTO E FISCALIZAÇÃO DE OBRAS, LDA</label
+          >
+        </div>
+
+        <div class="EMPRESA">
+          <input type="radio" id="ntau" name="empresa" value="NTAU, LDA" />
+          <label for="ntau">NTAU, LDA</label>
+        </div>
+      </form>
+
+      <input
+        class="btn_entrar"
+        type="button"
+        id="entrar"
+        onclick="entrar()"
+        value="Entrar"
+      />
+      <a href="/src/home/index.html">Voltar atrás</a>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="row">
+        <a href="#">Politica de Privacidade</a>
+
+        <a href="#">Termos de Uso</a>
+
+        <a href="#">Status</a>
+      </div>
+      <p>2025 Assemblante. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>
+
+<script>
+  function entrar() {
+    const selecionada = document.querySelector('input[name="empresa"]:checked');
+
+    if (!selecionada) {
+      alert("Por favor, selecione uma empresa.");
+      return;
+    }
+
+    const empresa = selecionada.value;
+
+    switch (empresa) {
+      case "ASSEMBLANTE DOS REIS":
+        window.location.href = "/src/login/login.html";
+        break;
+      case "CAPITEL PROJECTO E FISCALIZAÇÃO DE OBRAS, LDA":
+        window.location.href = "#";
+        break;
+      case "NTAU, LDA":
+        window.location.href = "#"; // podes alterar conforme o destino real
+        break;
+      default:
+        alert("Empresa não reconhecida.");
+    }
+  }
+</script>
