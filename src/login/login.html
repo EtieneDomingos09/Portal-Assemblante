@@ -3,63 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-----==========CSS ==========-------->
+    <link rel="icon" type="image/x-icon" href="/assets/img/ass_logo1.png" />
     <link rel="stylesheet" type="text/css" href="css/login.css">
-     <!--======== FAVICON =========----- -->
-     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/">
     <title> Login da Plataforma da Assemblante</title>
-    <!-- Biblioteca sweetalert2 -->
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
-        <img class="headerImge" src="/assets/img/ass_logo1.png" alt="logo Assemblante">
+        <img class="headerImge" src="/assets/img/logo-sem-fundo.png" alt="logo Assemblante">
+        <div class="header-title">
+            ASSEMBLANTE <span class="header-subtitle">DOS REIS</span>
+        </div>
     </header>
 
     <main>
         <img src="/assets/img/Ass_login.png" alt="logo Assemblante" class="logo">
+        
+        <h1 class="main-title">
+            <span class="inicie">Inicie sessão com a sua conta</span>
+        </h1>
 
-        <h1> Inicie sessão <span class="inicie">com a sua conta</span></h1>
+        <div class="progress-indicator" id="progressIndicator">
+            <div class="progress-step active" id="step1"></div>
+            <div class="progress-step" id="step2"></div>
+        </div>
 
-        <form class="form" id="loginForm" method="POST">
-            <div class="email">
-                <input type="email" name="email" id="emailInput" placeholder="Email" required>
+        <form class="form-container" id="loginForm" method="POST">
+            <!-- Etapa 1: Email -->
+            <div class="input-group" id="emailGroup">
+                <div class="input-wrapper" id="emailWrapper">
+                    <input type="email" name="email" id="emailInput" placeholder="Digite seu email" required autocomplete="email">
+                    <button type="button" class="input-action" id="emailAction">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="error-message" id="emailError"></div>
+                <div class="success-message" id="emailSuccess"></div>
             </div>
 
-            <div class="password" id="password" style="display: none;">
-                <input type="password" name="senha" id="senhaInput" placeholder="Palavra-passe">
-                <img src="img/arrows.png" alt="seta" class="seta">
+            <!-- Etapa 2: Senha (oculta inicialmente) -->
+            <div class="password-step" id="passwordStep">
+                <div class="input-group">
+                    <div class="input-wrapper" id="passwordWrapper">
+                        <input type="password" name="senha" id="passwordInput" placeholder="Digite sua senha">
+                        <button type="button" class="input-action" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="checkbox-group" id="checkboxGroup">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Guardar a sessão</label>
+                </div>
             </div>
 
-            <!-- Botão oculto, necessário para submeter com Enter -->
-            <button type="submit" class="btn"></button>
-
+            <button type="submit" class="main-button" id="submitButton">
+                Continuar
+            </button>
         </form>
 
-        <div class="check">
-            <input type="checkbox" id="remember" name="remember" value="remember">
-                <label for="remember">Guardar a sessão</label>
+        <div class="links-container">
+            <a href="esqueciSenha.php" class="link" id="forgotPassword">Esqueceu-se da palavra-passe?</a>
+            <a href="/src/login/escolhaEmpresa.html" class="link back-link" id="backLink">Voltar atrás</a>
         </div>
-        
-        <a href="esqueciSenha.php">Esqueceu-se à palavra-passe</a>
-        <a href="/src/login/escolhaEmpresa.html">Voltar atrás</a>
-       
     </main>
 
-    <!-- FOOTER -->
+    <!--footer -->
     <footer>
-        <div class="row">
-            <a href="#">Politica de Privacidade</a>
-
+        <div class="footer-links">
+            <a href="#">Política de Privacidade</a>
             <a href="#">Termos de Uso</a>
-
             <a href="#">Status</a>
         </div>
-        <p>2025 Assemblante. Todos os direitos reservados.</p>
+        <div class="footer-copyright">
+            © 2025 Assemblante. Todos os direitos reservados.
+        </div>
     </footer>
+
     
 </body>
-<script src="js/index.js" ></script>
+<script src="js/main.js" ></script>
 </html>

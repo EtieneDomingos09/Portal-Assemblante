@@ -42,6 +42,7 @@ body {
   right: 0;
   z-index: 1000;
   background: rgba(55, 55, 120, 0.95);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(180, 139, 52, 0.2);
   transition: var(--transition);
