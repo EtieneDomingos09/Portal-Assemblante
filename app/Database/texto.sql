@@ -17,6 +17,7 @@ CREATE TABLE usuarios (
 
 
 INSERT INTO usuarios (usuario_id, nome, usuario, senha, email, posicao_id, estado) VALUES ('1', 'Arnaldo Neto', 'Arnaldo', '234','arnaldoneto@assemblante.co.ao', '1', '1');
+INSERT INTO usuarios (usuario_id, nome, usuario, senha, email, posicao_id, estado) VALUES ('1', 'Etiene Domingos', 'Etiene', '234','teste@gmail.com', '1', '1');
 
 INSERT INTO posicao (nome) VALUES ('Informatico');
 INSERT INTO posicao (nome) VALUES ('Administrador');

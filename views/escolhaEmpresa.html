@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/escolhaEmpresa.css" />
+    <title>Escolha a Empresa - Assemblante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="header">
+      <img
+        src="../assets/img/ass_logo1.png"
+        alt="Logo Assemblante"
+        class="header-logo"
+      />
+      <div class="header-decoration"></div>
+    </header>
+
+    <main class="main-container">
+      <div class="selection-card">
+        <img
+          src="../assets/img/Ass_login.png"
+          alt="Logo Assemblante"
+          class="brand-logo"
+        />
+
+        <h1 class="selection-title">Selecione a Empresa</h1>
+        <p class="selection-subtitle">Escolha a empresa que pretende aceder</p>
+
+        <form class="companies-container" id="companyForm">
+          <div class="company-option">
+            <input
+              type="radio"
+              id="assemblantes"
+              name="empresa"
+              value="ASSEMBLANTE DOS REIS"
+              class="company-input"
+              checked
+            />
+            <label for="assemblantes" class="company-label"
+              >ASSEMBLANTE DOS REIS</label
+            >
+          </div>
+
+          <div class="company-option">
+            <input
+              type="radio"
+              id="capitel"
+              name="empresa"
+              value="CAPITEL PROJECTO E FISCALIZAÇÃO DE OBRAS, LDA"
+              class="company-input"
+            />
+            <label for="capitel" class="company-label"
+              >CAPITEL PROJECTO E FISCALIZAÇÃO DE OBRAS, LDA</label
+            >
+          </div>
+
+          <div class="company-option">
+            <input
+              type="radio"
+              id="ntau"
+              name="empresa"
+              value="NTAU, LDA"
+              class="company-input"
+            />
+            <label for="ntau" class="company-label">NTAU, LDA</label>
+          </div>
+        </form>
+
+        <button
+          type="button"
+          class="enter-button"
+          id="enterBtn"
+          onclick="entrar()"
+        >
+          Entrar
+        </button>
+
+        <a href="../index.html" class="back-link">← Voltar atrás</a>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#" class="footer-link">Política de Privacidade</a>
+          <a href="#" class="footer-link">Termos de Uso</a>
+          <a href="#" class="footer-link">Status</a>
+        </div>
+        <p class="footer-copyright">
+          2025 Assemblante. Todos os direitos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      function entrar() {
+        const selecionada = document.querySelector(
+          'input[name="empresa"]:checked'
+        );
+        const enterBtn = document.getElementById("enterBtn");
+
+        if (!selecionada) {
+          alert("Por favor, selecione uma empresa.");
+          return;
+        }
+
+        // Adiciona estado de loading
+        enterBtn.classList.add("loading");
+        enterBtn.disabled = true;
+        enterBtn.textContent = "Carregando...";
+
+        const empresa = selecionada.value;
+
+        // Simula um pequeno delay para melhor UX
+        setTimeout(() => {
+          switch (empresa) {
+            case "ASSEMBLANTE DOS REIS":
+              window.location.href = "../views/login.html";
+              break;
+            case "CAPITEL PROJECTO E FISCALIZAÇÃO DE OBRAS, LDA":
+              window.location.href = "#"; // Alterar para o destino correto
+              break;
+            case "NTAU, LDA":
+              window.location.href = "#"; // Alterar para o destino correto
+              break;
+            default:
+              alert("Empresa não reconhecida.");
+              // Remove estado de loading em caso de erro
+              enterBtn.classList.remove("loading");
+              enterBtn.disabled = false;
+              enterBtn.textContent = "Entrar";
+          }
+        }, 800);
+      }
+
+      // Adiciona suporte para navegação por teclado
+      document.addEventListener("DOMContentLoaded", function () {
+        const radioButtons = document.querySelectorAll('input[name="empresa"]');
+        const enterBtn = document.getElementById("enterBtn");
+
+        // Atualiza o estado do botão baseado na seleção
+        radioButtons.forEach((radio) => {
+          radio.addEventListener("change", function () {
+            enterBtn.disabled = false;
+          });
+        });
+
+        // Permite usar Enter para submeter
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" && !enterBtn.disabled) {
+            entrar();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

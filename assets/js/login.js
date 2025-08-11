@@ -22,6 +22,7 @@ class LoginManager {
         this.emailSuccess = document.getElementById('emailSuccess');
         this.passwordError = document.getElementById('passwordError');
         this.forgotPassword = document.getElementById('forgotPassword');
+        this.rememberCheckbox = document.getElementById('remember');
     }
 
     bindEvents() {
@@ -35,6 +36,7 @@ class LoginManager {
         this.passwordInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.handlePasswordStep();
         });
+        this.passwordInput.addEventListener('input', () => this.clearMessages());
 
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -66,44 +68,47 @@ class LoginManager {
         this.showLoading();
 
         try {
-            // Simular validação de email (substitua pela sua lógica)
             const isValidEmail = await this.validateEmail(email);
             
-            if (isValidEmail) {
+            if (isValidEmail.sucesso) {
                 this.showSuccess('emailSuccess', 'Email validado com sucesso!');
                 setTimeout(() => {
-                    this.proceedToPasswordStep();
+                    this.proceedToPasswordStep(isValidEmail.nome);
                 }, 800);
             } else {
-                this.showError('emailError', 'Email não encontrado em nosso sistema');
+                this.showError('emailError', isValidEmail.mensagem || 'Email não encontrado');
                 this.hideLoading();
             }
         } catch (error) {
-            this.showError('emailError', 'Erro ao validar email. Tente novamente.');
+            console.error('Erro ao validar email:', error);
+            this.showError('emailError', 'Erro ao validar email. Verifique sua conexão.');
             this.hideLoading();
         }
     }
 
     async validateEmail(email) {
-        // Simular delay de API
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Aqui você faria a chamada real para sua API
-        // Exemplo:
-        /*
-        const response = await fetch('/api/validate-email', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        });
-        return response.ok;
-        */
-        
-        // Por enquanto, vamos aceitar qualquer email válido
-        return true;
+        try {
+            const response = await fetch('../../app/controllers/verificar_email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            throw error;
+        }
     }
 
-    proceedToPasswordStep() {
+    proceedToPasswordStep(nomeUsuario = null) {
         this.currentStep = 2;
         this.emailValidated = true;
         
@@ -120,6 +125,11 @@ class LoginManager {
         // Atualizar botão
         this.submitButton.textContent = 'Entrar';
         
+        // Mostrar nome do usuário se disponível
+        if (nomeUsuario) {
+            this.showWelcomeMessage(nomeUsuario);
+        }
+        
         // Focar no campo de senha
         setTimeout(() => {
             this.passwordInput.focus();
@@ -128,7 +138,25 @@ class LoginManager {
         this.hideLoading();
     }
 
-    handlePasswordStep() {
+    showWelcomeMessage(nome) {
+        const welcomeDiv = document.createElement('div');
+        welcomeDiv.className = 'welcome-message';
+        welcomeDiv.innerHTML = `<p>Olá, <strong>${nome}</strong>!</p>`;
+        welcomeDiv.style.cssText = `
+            margin: 10px 0;
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            color: #495057;
+            font-size: 14px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        `;
+        
+        this.passwordStep.insertBefore(welcomeDiv, this.passwordStep.firstChild);
+    }
+
+    async handlePasswordStep() {
         const password = this.passwordInput.value;
         
         if (!password) {
@@ -136,13 +164,13 @@ class LoginManager {
             return;
         }
 
-        if (password.length < 6) {
-            this.showError('passwordError', 'A senha deve ter pelo menos 6 caracteres');
+        if (password.length < 3) { // Ajustado para suas necessidades
+            this.showError('passwordError', 'A senha deve ter pelo menos 3 caracteres');
             return;
         }
 
-        // Aqui você faria o login real
-        this.performLogin();
+        // Realizar login
+        await this.performLogin();
     }
 
     async performLogin() {
@@ -150,45 +178,54 @@ class LoginManager {
         this.submitButton.innerHTML = '<div class="loader"></div>';
 
         try {
-            // Simular login
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Aqui você faria a chamada real para sua API
-            /*
-            const formData = new FormData();
-            formData.append('email', this.emailInput.value);
-            formData.append('senha', this.passwordInput.value);
-            formData.append('remember', document.getElementById('remember').checked);
-            
-            const response = await fetch('/api/login', {
+            const loginData = {
+                email: this.emailInput.value.trim(),
+                senha: this.passwordInput.value,
+                remember: this.rememberCheckbox ? this.rememberCheckbox.checked : false
+            };
+
+            const response = await fetch('../../app/controllers/processar_login.php', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginData)
             });
-            
-            if (response.ok) {
-                const data = await response.json();
-                // Redirecionar para dashboard
-                window.location.href = data.redirect_url || '/dashboard';
-            } else {
-                throw new Error('Login failed');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            */
+
+            const data = await response.json();
             
-            // Sucesso - redirecionar ou mostrar mensagem
-            Swal.fire({
-                icon: 'success',
-                title: 'Login realizado com sucesso!',
-                text: 'Redirecionando...',
-                timer: 2000,
-                showConfirmButton: false
-            }).then(() => {
-                // Simular redirecionamento
-                console.log('Redirecionando para dashboard...');
-                // window.location.href = '/dashboard';
-            });
+            if (data.sucesso) {
+                // Sucesso
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login realizado com sucesso!',
+                    text: `Bem-vindo, ${data.usuario.nome}!`,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then(() => {
+                    // Redirecionar para dashboard
+                    window.location.href = data.redirect_url || '../../views/dashboard.html';
+                });
+            } else {
+                // Erro de credenciais
+                this.showError('passwordError', data.mensagem || 'Credenciais inválidas');
+                this.submitButton.disabled = false;
+                this.submitButton.textContent = 'Entrar';
+                
+                // Limpar senha por segurança
+                this.passwordInput.value = '';
+                this.passwordInput.focus();
+            }
             
         } catch (error) {
-            this.showError('passwordError', 'Senha incorreta. Tente novamente.');
+            console.error('Erro no login:', error);
+            this.showError('passwordError', 'Erro ao processar login. Verifique sua conexão.');
             this.submitButton.disabled = false;
             this.submitButton.textContent = 'Entrar';
         }
@@ -221,6 +258,11 @@ class LoginManager {
             this.emailWrapper.classList.add('error');
         } else if (elementId === 'passwordError') {
             this.passwordWrapper.classList.add('error');
+        }
+
+        // Feedback háptico para dispositivos móveis
+        if ('vibrate' in navigator) {
+            navigator.vibrate(100);
         }
     }
 
@@ -283,6 +325,26 @@ const Utils = {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
+    },
+
+    // Função para logout
+    async logout() {
+        try {
+            const response = await fetch('../../app/controllers/logout.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            if (response.ok) {
+                window.location.href = '../../views/login.html';
+            }
+        } catch (error) {
+            console.error('Erro no logout:', error);
+            // Forçar redirecionamento mesmo com erro
+            window.location.href = '/src/login/login.html';
+        }
     }
 };
 
@@ -311,7 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Detectar mudanças de orientação
     window.addEventListener('orientationchange', Utils.debounce(() => {
-        // Reajustar layout se necessário
         const main = document.querySelector('main');
         if (main && Utils.isMobile()) {
             Utils.smoothScrollTo(main);
@@ -323,26 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('loaded');
     });
 });
-
-// Animações de entrada melhoradas
-const AnimationController = {
-    observeElements() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-    }
-};
 
 // Feedback háptico para dispositivos móveis
 const HapticFeedback = {
@@ -391,7 +432,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         lastTouchEnd = now;
     }, false);
-    
-    // Inicializar animações
-    AnimationController.observeElements();
+});
+
+// Verificar se usuário já está logado
+document.addEventListener('DOMContentLoaded', () => {
+    // Verificar sessão ativa
+    fetch('../../app/controllers/verificar_sessao.php', {})
+        .then(response => response.json())
+        .then(data => {
+            if (data.logado) {
+                // Usuário já está logado, redirecionar
+                window.location.href = '../../views/dashboard.html';
+            }
+        })
+        .catch(error => {
+            console.log('Verificação de sessão falhou:', error);
+            // Continuar normalmente
+        });
 });
