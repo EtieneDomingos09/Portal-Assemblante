@@ -34,7 +34,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 16px;
+  padding: 16px 16px 0 16px;
   background: var(--gradient-primary);
   overflow-y: auto;
   position: relative;
@@ -121,12 +121,13 @@ body::before {
   justify-content: center;
   position: relative;
   z-index: 5;
+  width: 100%;
+  min-height: 0;
 }
 
 /* CARD PRINCIPAL - Seguindo exatamente o padrão do login */
 .selection-card {
   background: var(--neutral-white);
-  margin: auto;
   width: 100%;
   max-width: 500px;
   color: var(--primary-blue);
@@ -145,8 +146,7 @@ body::before {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   animation: fadeInUp 0.6s ease-out;
-  align-self: center;
-  justify-self: center;
+  margin: auto;
 }
 
 .selection-card:hover {
@@ -366,9 +366,11 @@ body::before {
   width: 100%;
 }
 
-/* FOOTER - Responsivo baseado no tamanho da tela */
+/* FOOTER - Corrigido para sempre ficar no final */
 .footer {
-  width: 100%;
+  width: calc(100% + 32px);
+  margin-left: -16px;
+  margin-right: -16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -384,22 +386,7 @@ body::before {
   flex-wrap: wrap;
   gap: 16px;
   margin-top: auto;
-  /* Footer fixo apenas em telas grandes */
   position: static;
-}
-
-/* Footer fixo apenas em desktop/tablet grandes */
-@media screen and (min-width: 768px) {
-  .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  body {
-    padding-bottom: 60px;
-  }
 }
 
 .footer-content {
@@ -511,7 +498,13 @@ body::before {
 /* iPad Pro / Large Tablet */
 @media screen and (min-width: 768px) and (max-width: 991px) {
   body {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
+  }
+  
+  .footer {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
   }
   
   .selection-card {
@@ -539,8 +532,13 @@ body::before {
 /* iPad / Tablet */
 @media screen and (min-width: 481px) and (max-width: 767px) {
   body {
-    padding: 16px;
-    padding-bottom: 60px;
+    padding: 16px 16px 0 16px;
+  }
+  
+  .footer {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-right: -16px;
   }
   
   .header {
@@ -599,7 +597,13 @@ body::before {
 /* Large Mobile */
 @media screen and (min-width: 376px) and (max-width: 480px) {
   body {
-    padding: 14px;
+    padding: 14px 14px 0 14px;
+  }
+  
+  .footer {
+    width: calc(100% + 28px);
+    margin-left: -14px;
+    margin-right: -14px;
   }
   
   .header {
@@ -671,7 +675,13 @@ body::before {
 /* Small Mobile */
 @media screen and (max-width: 375px) {
   body {
-    padding: 12px;
+    padding: 12px 12px 0 12px;
+  }
+  
+  .footer {
+    width: calc(100% + 24px);
+    margin-left: -12px;
+    margin-right: -12px;
   }
   
   .header {
@@ -755,7 +765,13 @@ body::before {
 /* Extra Small Mobile */
 @media screen and (max-width: 320px) {
   body {
-    padding: 10px;
+    padding: 10px 10px 0 10px;
+  }
+  
+  .footer {
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    margin-right: -10px;
   }
   
   .selection-card {
