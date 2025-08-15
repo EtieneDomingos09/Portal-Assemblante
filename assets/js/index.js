@@ -171,7 +171,7 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// SUBMISSÃO DO FORMULÁRIO DO PLANO - PREPARADO PARA MULTICAIXA EXPRESS
+// SUBMISSÃO DO FORMULÁRIO DO PLANO 
 document.getElementById("planForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -346,7 +346,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
   // TODO: PROCESSAR DADOS DE CONTATO INTERNAMENTE
   console.log('Dados de contato:', contactData);
   
-  // Aqui você pode:
+  // Aqui você iremos implementar a lógica para processar os dados de contato, como:
   // 1. Enviar para seu backend
   // 2. Salvar em banco de dados
   // 3. Enviar email de notificação
