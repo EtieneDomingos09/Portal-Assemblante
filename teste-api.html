@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste API Cliente</title>
+</head>
+<body>
+    <h2>Teste da API de Validação</h2>
+    <button onclick="testarAPI()">Testar com número 1</button>
+    <div id="resultado"></div>
+
+    <script>
+    async function testarAPI() {
+        const resultado = document.getElementById('resultado');
+        resultado.innerHTML = 'Testando...';
+        
+        try {
+            console.log('Fazendo requisição para:', 'http://localhost:8000/app/controllers/validar-cliente.php');
+            
+            const response = await fetch('http://localhost:8000/app/controllers/validar-cliente.php', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ numero_cliente: "1" })
+            });
+            
+            console.log('Status da resposta:', response.status);
+            console.log('Headers da resposta:', [...response.headers.entries()]);
+            
+            const responseText = await response.text();
+            console.log('Resposta bruta:', responseText);
+            
+            // Tentar fazer parse do JSON
+            let data;
+            try {
+                data = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Erro ao fazer parse do JSON:', e);
+                resultado.innerHTML = `<pre>Erro de JSON: ${e.message}\nResposta: ${responseText}</pre>`;
+                return;
+            }
+            
+            resultado.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            resultado.innerHTML = `<pre>Erro: ${error.message}</pre>`;
+        }
+    }
+    </script>
+</body>
+</html>

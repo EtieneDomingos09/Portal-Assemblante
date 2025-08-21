@@ -121,7 +121,7 @@
                 <h3 class="plan-speed">4 Mbps</h3>
                 <p class="plan-description">Para redes sociais e e-mails</p>
                 <div class="plan-price">
-                  15.000 Kz<span class="price-period">/mês</span>
+                  15.000,00 Kz<span class="price-period">/mês</span>
                 </div>
               </div>
               <ul class="plan-features">
@@ -158,7 +158,7 @@
                 <h3 class="plan-speed">6 Mbps</h3>
                 <p class="plan-description">Para YouTube e Netflix</p>
                 <div class="plan-price">
-                  17.982 kz<span class="price-period">/mês</span>
+                  17.982,00 Kz<span class="price-period">/mês</span>
                 </div>
               </div>
               <ul class="plan-features">
@@ -195,7 +195,7 @@
                 <h3 class="plan-speed">8 Mbps</h3>
                 <p class="plan-description">Ultra performance</p>
                 <div class="plan-price">
-                  21 550 Kz<span class="price-period">/mês</span>
+                  21.550,00 Kz<span class="price-period">/mês</span>
                 </div>
               </div>
               <ul class="plan-features">
@@ -235,7 +235,7 @@
                   Para chamadas de vídeo e streaming
                 </p>
                 <div class="plan-price">
-                  25.000 Kz<span class="price-period">/mês</span>
+                  25.000,00 Kz<span class="price-period">/mês</span>
                 </div>
               </div>
               <ul class="plan-features">
@@ -259,6 +259,78 @@
               <button
                 onclick="openPlanModal('10 Mbps', '25.000 Kz', 25000)"
                 class="plan-button plan-button-featured"
+              >
+                Aderir Plano
+              </button>
+            </div>
+          </div>
+          <!-- Plano 5 -->
+           <div class="plan-card">
+            <div class="plan-content">
+              <div class="plan-header">
+                <h3 class="plan-speed">12 Mbps</h3>
+                <p class="plan-description">Para redes sociais e e-mails</p>
+                <div class="plan-price">
+                  28.000,00 Kz<span class="price-period">/mês</span>
+                </div>
+              </div>
+              <ul class="plan-features">
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Download: 12 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Upload: 8 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Até 2 usuários</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Tráfego ilimitado</span>
+                </li>
+              </ul>
+              <button
+                onclick="openPlanModal('4 Mbps', '15.000 Kz', 15000)"
+                class="plan-button"
+              >
+                Aderir Plano
+              </button>
+            </div>
+          </div>
+          <!-- Plano 6 -->
+           <div class="plan-card">
+            <div class="plan-content">
+              <div class="plan-header">
+                <h3 class="plan-speed">15 Mbps</h3>
+                <p class="plan-description">Para redes sociais e e-mails</p>
+                <div class="plan-price">
+                  35.000,00 Kz<span class="price-period">/mês</span>
+                </div>
+              </div>
+              <ul class="plan-features">
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Download: 15 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Upload: 8 Mbps</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Até 2 usuários</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check feature-check"></i>
+                  <span>Tráfego ilimitado</span>
+                </li>
+              </ul>
+              <button
+                onclick="openPlanModal('4 Mbps', '15.000 Kz', 15000)"
+                class="plan-button"
               >
                 Aderir Plano
               </button>
@@ -454,11 +526,13 @@
                 <select id="plan" name="plan" class="form-select">
                   <option value="">Selecione um plano</option>
                   <option value="4 Mbps">4 Mbps - 15.000 Kz</option>
-                  <option value="6 Mbps">6 Mbps - 17.982 kz</option>
+                  <option value="6 Mbps">6 Mbps - 17.982 Kz</option>
                   <option value="8 Mbps">
                     8 Mbps - 21.550 Kz
                   </option>
                   <option value="10 Mbps">10 Mbps - 25.000 Kz (Mais Popular)</option>
+                  <option value="12 Mbps">12 Mbps - 28.000 Kz</option>
+                  <option value="15 Mbps">15 Mbps - 35.000 Kz</option>
                   <option value="IPTV">IPTV - Grátis com instalação</option>
                   <option value="Instalação">Instalação - 65.000 Kz</option>
                 </select>
@@ -486,7 +560,7 @@
       </div>
     </section>
 
-    <!-- Pop-Up DE ADESÃO AO PLANO -->
+    <!-- MODAL DE ADESÃO AO PLANO -->
     <div id="planModal" class="modal-overlay">
       <div class="modal-container">
         <div class="modal-header">
@@ -507,13 +581,16 @@
             </div>
           </div>
 
+          <!-- Formulário -->
           <form id="planForm" class="plan-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="clientNumber" class="form-label">
-                  <i class="fas fa-id-card"></i>
-                  Número de Cliente
-                </label>
+            
+            <!-- Campo número do cliente -->
+            <div class="form-group">
+              <label for="clientNumber" class="form-label">
+                <i class="fas fa-id-card"></i>
+                Número de Cliente
+              </label>
+              <div class="input-with-button">
                 <input
                   type="text"
                   id="clientNumber"
@@ -522,78 +599,35 @@
                   class="form-input"
                   placeholder="Ex: 123456"
                 />
-              </div>
-
-              <div class="form-group">
-                <label for="fullName" class="form-label">
-                  <i class="fas fa-user"></i>
-                  Nome Completo
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  required
-                  class="form-input"
-                  placeholder="Digite seu nome completo"
-                />
+                <button 
+                  type="button" 
+                  id="validateClientBtn" 
+                  class="btn-validate"
+                  onclick="validarCliente()">
+                  <i class="fas fa-search"></i> Validar
+                </button>
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="paymentMonth" class="form-label">
-                  <i class="fas fa-calendar-alt"></i>
-                  Mês de Pagamento
-                </label>
-                <select id="paymentMonth" name="paymentMonth" required class="form-select">
-                  <option value="">Selecione o mês</option>
-                  <option value="Janeiro">Janeiro 2025</option>
-                  <option value="Fevereiro">Fevereiro 2025</option>
-                  <option value="Março">Março 2025</option>
-                  <option value="Abril">Abril 2025</option>
-                  <option value="Maio">Maio 2025</option>
-                  <option value="Junho">Junho 2025</option>
-                  <option value="Julho">Julho 2025</option>
-                  <option value="Agosto">Agosto 2025</option>
-                  <option value="Setembro">Setembro 2025</option>
-                  <option value="Outubro">Outubro 2025</option>
-                  <option value="Novembro">Novembro 2025</option>
-                  <option value="Dezembro">Dezembro 2025</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="phoneNumber" class="form-label">
-                  <i class="fas fa-phone"></i>
-                  Telefone de Contato
-                </label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  required
-                  class="form-input"
-                  placeholder="+244 XXX XXX XXX"
-                />
-              </div>
+            <!-- Seção de informações do cliente -->
+            <div id="clientInfoSection" class="client-info" style="display:none;">
+              <h4><i class="fas fa-user-check"></i> Dados do Cliente</h4>
+              <p><strong>Nome:</strong> <span id="clientName"></span></p>
+              <p><strong>Telefone:</strong> <span id="clientPhone"></span></p>
+              <p><strong>Email:</strong> <span id="clientEmail"></span></p>
+              <p><strong>Endereço:</strong> <span id="clientAddress"></span></p>
+              <p><strong>Pacote Atual:</strong> <span id="clientPackage"></span></p>
+              <p><strong>Último Pagamento:</strong> <span id="clientLastPayment"></span></p>
+              <p><strong>Status:</strong> <span id="clientStatus"></span></p>
             </div>
 
-            <div class="form-group">
-              <label for="address" class="form-label">
-                <i class="fas fa-map-marker-alt"></i>
-                Endereço Completo
-              </label>
-              <textarea
-                id="address"
-                name="address"
-                rows="3"
-                required
-                class="form-textarea"
-                placeholder="Ex: Urbanização Kalawenda, Edificio 22, Apartamento 14, Luanda"
-              ></textarea>
+            <!-- Cliente não encontrado -->
+            <div id="clientNotFound" class="client-not-found" style="display:none;">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>Cliente não encontrado. Verifique o número e tente novamente.</p>
             </div>
 
+            <!-- Observações 
             <div class="form-group">
               <label for="observations" class="form-label">
                 <i class="fas fa-comment"></i>
@@ -602,19 +636,24 @@
               <textarea
                 id="observations"
                 name="observations"
-                rows="2"
+                rows="3"
                 class="form-textarea"
-                placeholder="Alguma observação adicional..."
-              ></textarea>
+                placeholder="Alguma observação adicional..."></textarea>
             </div>
+             -->
 
+            <!-- Ações -->
             <div class="modal-actions">
               <button type="button" onclick="closePlanModal()" class="btn-cancel">
                 <i class="fas fa-times"></i>
                 Cancelar
               </button>
-              <!-- BOTÃO PREPARADO PARA MULTICAIXA EXPRESS -->
-              <button type="submit" class="btn-submit">
+              <button 
+                type="submit" 
+                id="paymentBtn" 
+                class="btn-submit" 
+                disabled
+                title="Valide o cliente primeiro">
                 <i class="fas fa-credit-card"></i>
                 Pagar com Multicaixa
               </button>
