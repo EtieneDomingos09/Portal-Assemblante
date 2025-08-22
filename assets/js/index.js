@@ -1,12 +1,12 @@
 // ================================
-// INICIALIZAÃ‡ÃƒO - ESCONDER MODAL AO CARREGAR
+// INICIALIZAÇÃO - ESCONDER MODAL AO CARREGAR
 // ================================
 document.addEventListener('DOMContentLoaded', function() {
-  // Garantir que o modal esteja escondido ao carregar a pÃ¡gina
+  // Garantir que o modal esteja escondido ao carregar a página
   const modal = document.getElementById("planModal");
   if (modal) {
     modal.classList.remove("active");
-    modal.style.display = "none"; // ForÃ§a esconder inicialmente
+    modal.style.display = "none"; // Força esconder inicialmente
   }
   document.body.style.overflow = "auto";
 });
@@ -52,7 +52,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // ================================
-// ANIMAÃ‡Ã•ES DOS PLANOS
+// ANIMAÇÕES DOS PLANOS
 // ================================
 const observerOptions = {
   threshold: 0.1,
@@ -125,13 +125,13 @@ document.querySelectorAll(".faq-item").forEach((item) => {
 });
 
 // ================================
-// SISTEMA DE VALIDAÃ‡ÃƒO DE CLIENTE + PAGAMENTO
+// SISTEMA DE VALIDAÇÃO DE CLIENTE + PAGAMENTO
 // ================================
 let clienteValidado = null;
 let selectedPlanData = { name: '', price: '', amount: 0 };
 
 /**
- * FunÃ§Ã£o para validar cliente via API PHP
+ * Função para validar cliente via API PHP
  */
 async function validarCliente() {
   const numeroClienteInput = document.getElementById('clientNumber');
@@ -143,16 +143,16 @@ async function validarCliente() {
   
   const numeroCliente = numeroClienteInput.value.trim();
   
-  // ValidaÃ§Ãµes bÃ¡sicas
+  // Validações Básicas
   if (!numeroCliente) {
-    showNotification('Por favor, digite o nÃºmero do cliente', 'error');
+    showNotification('Por favor, digite o número do cliente', 'error');
     numeroClienteInput.focus();
     return;
   }
   
-  // ValidaÃ§Ã£o ajustada para aceitar CLI001 ou apenas nÃºmeros
-  if (!/^(CLI\d+|\d+)$/i.test(numeroCliente)) {
-    showNotification('Formato inválido. Use CLI001 ou apenas números', 'error');
+  // Validação ajustada para aceitar CLI001 ou apenas números
+  if (!/^CLI\d+$/i.test(numeroCliente)) {
+    showNotification('Formato inválido. Use CLI seguido de números', 'error');
     numeroClienteInput.focus();
     return;
   }
@@ -163,6 +163,9 @@ async function validarCliente() {
   setLoadingState(validateBtn, true);
   
   try {
+    // Extrair apenas os números do CLI para enviar à API
+    const numeroParaAPI = numeroCliente.replace(/^CLI/i, '');
+    
     // Chamada para API PHP
     const response = await fetch('../../app/controllers/validar-cliente.php', {
       method: 'POST',
@@ -170,10 +173,10 @@ async function validarCliente() {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ numero_cliente: numeroCliente })
+      body: JSON.stringify({ numero_cliente: numeroParaAPI })
     });
     
-    // Verificar se a resposta Ã© vÃ¡lida
+    // Verificar se a resposta é válida
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -189,7 +192,7 @@ async function validarCliente() {
       clienteValidado = null;
       mostrarClienteNaoEncontrado();
       desabilitarBotaoPagamento();
-      showNotification(result.message || 'Cliente nÃ£o encontrado', 'error');
+      showNotification(result.message || 'Cliente não encontrado', 'error');
     }
   } catch (error) {
     console.error('Erro ao validar cliente:', error);
@@ -198,13 +201,13 @@ async function validarCliente() {
     
     // Tratar diferentes tipos de erro
     if (error.message.includes('HTTP 404')) {
-      showNotification('API nÃ£o encontrada. Verifique a configuraÃ§Ã£o do servidor.', 'error');
+      showNotification('API não encontrada. Verifique a configuração do servidor.', 'error');
     } else if (error.message.includes('HTTP 500')) {
       showNotification('Erro interno do servidor. Contate o suporte.', 'error');
     } else if (error.name === 'TypeError') {
-      showNotification('Erro de conexÃ£o. Verifique sua internet.', 'error');
+      showNotification('Erro de conexão. Verifique sua internet.', 'error');
     } else {
-      showNotification('Erro de conexÃ£o. Tente novamente.', 'error');
+      showNotification('Erro de conexão. Tente novamente.', 'error');
     }
   } finally {
     setLoadingState(validateBtn, false);
@@ -212,7 +215,7 @@ async function validarCliente() {
 }
 
 /**
- * Exibir informaÃ§Ãµes do cliente validado
+ * Exibir informações do cliente validado
  */
 function mostrarInformacoesCliente(cliente) {
   const elements = {
@@ -223,20 +226,43 @@ function mostrarInformacoesCliente(cliente) {
     clientPackage: document.getElementById('clientPackage'),
     clientLastPayment: document.getElementById('clientLastPayment'),
     clientStatus: document.getElementById('clientStatus'),
-    clientInfoSection: document.getElementById('clientInfoSection')
+    clientInfoSection: document.getElementById('clientInfoSection'),
+    clientValue: document.getElementById('clientValue'),
+    clientONU: document.getElementById('clientONU'),
+    clientPPPoE: document.getElementById('clientPPPoE'),
+    clientBilhete: document.getElementById('clientBilhete'),
+    clientInscricao: document.getElementById('clientInscricao'),
+    clientDataPagamento: document.getElementById('clientDataPagamento'),
+    clientTermino: document.getElementById('clientTermino'),
+    clientObservacao: document.getElementById('clientObservacao')
   };
 
+  // Campos principais
   if (elements.clientName) elements.clientName.textContent = cliente.nome || 'N/A';
   if (elements.clientPhone) elements.clientPhone.textContent = cliente.telefone || 'N/A';
   if (elements.clientEmail) elements.clientEmail.textContent = cliente.email || 'N/A';
   if (elements.clientAddress) elements.clientAddress.textContent = cliente.endereco || 'N/A';
   if (elements.clientPackage) elements.clientPackage.textContent = cliente.pacote || 'N/A';
-  if (elements.clientLastPayment) elements.clientLastPayment.textContent = cliente.mes_pagamento || 'N/A';
+  
+  // Campos de pagamento
+  if (elements.clientLastPayment) elements.clientLastPayment.textContent = cliente.mes_pago || 'N/A';
+  if (elements.clientValue) elements.clientValue.textContent = cliente.valor_mensal || 'N/A';
+  if (elements.clientDataPagamento) elements.clientDataPagamento.textContent = cliente.data_pagamento || 'N/A';
+  if (elements.clientTermino) elements.clientTermino.textContent = cliente.termino || 'N/A';
+  
+  // Campos técnicos
+  if (elements.clientONU) elements.clientONU.textContent = cliente.onu || 'N/A';
+  if (elements.clientPPPoE) elements.clientPPPoE.textContent = cliente.pppoe || 'N/A';
+  
+  // Campos adicionais
+  if (elements.clientBilhete) elements.clientBilhete.textContent = cliente.numero_bilhete || 'N/A';
+  if (elements.clientInscricao) elements.clientInscricao.textContent = cliente.data_inscricao || 'N/A';
+  if (elements.clientObservacao) elements.clientObservacao.textContent = cliente.observacao || 'Nenhuma observação';
   
   // Status do cliente com classes CSS
-  if (elements.clientStatus && cliente.status) {
-    elements.clientStatus.textContent = cliente.status.texto || 'N/A';
-    elements.clientStatus.className = `client-status ${cliente.status.classe || 'status-inativo'}`;
+  if (elements.clientStatus && cliente.status_calculado) {
+    elements.clientStatus.textContent = cliente.status_calculado.texto || 'N/A';
+    elements.clientStatus.className = `client-status ${cliente.status_calculado.classe || 'status-inativo'}`;
   }
   
   if (elements.clientInfoSection) {
@@ -245,7 +271,7 @@ function mostrarInformacoesCliente(cliente) {
 }
 
 /**
- * Mostrar mensagem de cliente nÃ£o encontrado
+ * Mostrar mensagem de cliente não encontrado
  */
 function mostrarClienteNaoEncontrado() {
   const clientNotFound = document.getElementById('clientNotFound');
@@ -255,7 +281,7 @@ function mostrarClienteNaoEncontrado() {
 }
 
 /**
- * Habilitar botÃ£o de pagamento
+ * Habilitar botão de pagamento
  */
 function habilitarBotaoPagamento() {
   const paymentBtn = document.getElementById('paymentBtn');
@@ -267,7 +293,7 @@ function habilitarBotaoPagamento() {
 }
 
 /**
- * Desabilitar botÃ£o de pagamento
+ * Desabilitar botão de pagamento
  */
 function desabilitarBotaoPagamento() {
   const paymentBtn = document.getElementById('paymentBtn');
@@ -279,7 +305,7 @@ function desabilitarBotaoPagamento() {
 }
 
 /**
- * Estado de carregamento dos botÃµes
+ * Estado de carregamento dos botões
  */
 function setLoadingState(button, isLoading) {
   if (!button) return;
@@ -306,26 +332,26 @@ function openPlanModal(planName, planPrice, planAmount) {
   const selectedPlanPrice = document.getElementById("selectedPlanPrice");
 
   if (!modal || !selectedPlanName || !selectedPlanPrice) {
-    console.error('Elementos do modal nÃ£o encontrados');
+    console.error('Elementos do modal não encontrados');
     return;
   }
 
   // Armazenar dados do plano selecionado
   selectedPlanData = { name: planName, price: planPrice, amount: planAmount };
 
-  // Atualizar informaÃ§Ãµes do plano no modal
+  // Atualizar informações do plano no modal
   selectedPlanName.textContent = planName;
   selectedPlanPrice.textContent = planPrice;
 
-  // Reset do formulÃ¡rio
+  // Reset do formulário
   resetModalForm();
   
   // Mostrar modal
-  modal.style.display = "flex"; // Garantir que estÃ¡ visÃ­vel
+  modal.style.display = "flex"; // Garantir que está visível
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
 
-  // Focar no campo apÃ³s abrir
+  // Focar no campo após abrir
   setTimeout(() => {
     const clientNumberInput = document.getElementById("clientNumber");
     if (clientNumberInput) {
@@ -344,7 +370,7 @@ function closePlanModal() {
   // Esconder modal
   modal.classList.remove("active");
   
-  // Aguardar animaÃ§Ã£o antes de esconder completamente
+  // Aguardar animação antes de esconder completamente
   setTimeout(() => {
     modal.style.display = "none";
   }, 300);
@@ -354,7 +380,7 @@ function closePlanModal() {
 }
 
 /**
- * Reset do formulÃ¡rio do modal
+ * Reset do formulário do modal
  */
 function resetModalForm() {
   const form = document.getElementById("planForm");
@@ -364,9 +390,15 @@ function resetModalForm() {
   const clientInfoSection = document.getElementById('clientInfoSection');
   const clientNotFound = document.getElementById('clientNotFound');
   const validateBtn = document.getElementById('validateClientBtn');
+  const clientNumberInput = document.getElementById('clientNumber');
   
   if (clientInfoSection) clientInfoSection.style.display = 'none';
   if (clientNotFound) clientNotFound.style.display = 'none';
+  
+  // Restaurar prefixo CLI no input
+  if (clientNumberInput) {
+    clientNumberInput.value = 'CLI';
+  }
   
   clienteValidado = null;
   selectedPlanData = { name: '', price: '', amount: 0 };
@@ -383,7 +415,7 @@ function resetModalForm() {
 document.addEventListener('DOMContentLoaded', function() {
   const modal = document.getElementById("planModal");
   if (modal) {
-    // Garantir que modal estÃ¡ escondido
+    // Garantir que modal está escondido
     modal.classList.remove("active");
     modal.style.display = "none";
     
@@ -407,7 +439,7 @@ document.addEventListener("keydown", function(e) {
 });
 
 // ================================
-// FORMULÃRIO DE PAGAMENTO
+// FORMULÁRIO DE PAGAMENTO
 // ================================
 document.addEventListener('DOMContentLoaded', function() {
   const planForm = document.getElementById("planForm");
@@ -436,7 +468,10 @@ document.addEventListener('DOMContentLoaded', function() {
         clientEmail: clienteValidado.email,
         clientAddress: clienteValidado.endereco,
         currentPackage: clienteValidado.pacote,
-        clientStatus: clienteValidado.status,
+        clientStatus: clienteValidado.status_calculado,
+        clientValue: clienteValidado.valor_mensal,
+        clientONU: clienteValidado.onu,
+        clientPPPoE: clienteValidado.pppoe,
         
         // Dados adicionais
         observations: formData.get("observations") || '',
@@ -498,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //     console.error('Erro no pagamento:', error);
     
 //     if (error.message.includes('HTTP 404')) {
-//       showNotification('API de pagamento nÃ£o encontrada.', 'error');
+//       showNotification('API de pagamento não encontrada.', 'error');
 //     } else if (error.message.includes('HTTP 500')) {
 //       showNotification('Erro interno do servidor. Contate o suporte.', 'error');
 //     } else {
@@ -510,12 +545,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // }
 
 // ================================
-// EVENTOS EXTRAS DO CLIENTE
+// EVENTOS EXTRAS DO CLIENTE (COM PREFIXO CLI)
 // ================================
 document.addEventListener('DOMContentLoaded', function() {
   const clientNumberInput = document.getElementById('clientNumber');
   
   if (clientNumberInput) {
+    // Definir valor inicial com prefixo CLI
+    clientNumberInput.value = 'CLI';
+    
     // Enter para validar
     clientNumberInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
@@ -524,18 +562,37 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // ValidaÃ§Ã£o de input ajustada para aceitar CLI001 e nÃºmeros
+    // Controlar input para manter prefixo CLI
     clientNumberInput.addEventListener('input', function(e) {
       let value = e.target.value.toUpperCase();
       
-      // Permite CLI seguido de nÃºmeros ou apenas nÃºmeros
-      if (value.startsWith('CLI')) {
-        value = value.replace(/[^CLI0-9]/g, '');
-      } else {
-        value = value.replace(/[^a-zA-Z0-9]/g, ''); // Permite alfanumÃ©rico
+      // Se o usuário deletar tudo, restaurar CLI
+      if (value === '' || value.length < 3) {
+        value = 'CLI';
+        e.target.setSelectionRange(3, 3); // Posicionar cursor após CLI
+      }
+      
+      // Se não começar com CLI, adicionar
+      if (!value.startsWith('CLI')) {
+        // Se começar com números, manter apenas os números e adicionar CLI
+        if (/^\d/.test(value)) {
+          value = 'CLI' + value.replace(/[^0-9]/g, '');
+        } else {
+          value = 'CLI';
+        }
+      }
+      
+      // Permitir apenas CLI seguido de números
+      value = value.replace(/^CLI/, 'CLI').replace(/[^CLI0-9]/g, '');
+      
+      // Garantir que CLI não seja duplicado
+      if (value.match(/CLI/g)?.length > 1) {
+        value = 'CLI' + value.replace(/CLI/g, '');
       }
       
       e.target.value = value;
+      
+      // Reset dos dados do cliente quando input muda
       clienteValidado = null;
       
       const clientInfoSection = document.getElementById('clientInfoSection');
@@ -546,11 +603,40 @@ document.addEventListener('DOMContentLoaded', function() {
       
       desabilitarBotaoPagamento();
     });
+    
+    // Evitar que o cursor seja posicionado antes de CLI
+    clientNumberInput.addEventListener('keydown', function(e) {
+      const cursorPos = e.target.selectionStart;
+      
+      // Evitar deletar/editar os primeiros 3 caracteres (CLI)
+      if (cursorPos < 3 && (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'ArrowLeft')) {
+        e.preventDefault();
+        e.target.setSelectionRange(3, 3);
+      }
+    });
+    
+    // Controlar posição do cursor
+    clientNumberInput.addEventListener('click', function(e) {
+      const cursorPos = e.target.selectionStart;
+      if (cursorPos < 3) {
+        e.target.setSelectionRange(3, 3);
+      }
+    });
+    
+    // Controlar seleção
+    clientNumberInput.addEventListener('select', function(e) {
+      const start = e.target.selectionStart;
+      const end = e.target.selectionEnd;
+      
+      if (start < 3) {
+        e.target.setSelectionRange(Math.max(3, start), end);
+      }
+    });
   }
 });
 
 // ================================
-// SISTEMA DE NOTIFICAÃ‡Ã•ES
+// SISTEMA DE NOTIFICAÇÕES
 // ================================
 function showNotification(message, type = 'success') {
   const notification = document.createElement("div");
@@ -574,7 +660,7 @@ function showNotification(message, type = 'success') {
 }
 
 // ================================
-// FORMULÃRIO DE CONTATO
+// FORMULÁRIO DE CONTATO
 // ================================
 document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById("contactForm");
@@ -591,15 +677,15 @@ document.addEventListener('DOMContentLoaded', function() {
         message: formData.get("message")
       };
 
-      // ValidaÃ§Ãµes
+      // Validações
       if (!contactData.name || !contactData.phone || !contactData.location) {
-        showNotification("Por favor, preencha todos os campos obrigatÃ³rios.", 'error');
+        showNotification("Por favor, preencha todos os campos obrigatórios.", 'error');
         return;
       }
 
       const phoneRegex = /^(\+?244|244)?[\s-]?[0-9]{3}[\s-]?[0-9]{3}[\s-]?[0-9]{3}$/;
       if (!phoneRegex.test(contactData.phone)) {
-        showNotification("Por favor, insira um nÃºmero de telefone vÃ¡lido (formato: 244 9XX XXX XXX).", 'error');
+        showNotification("Por favor, insira um número de telefone válido (formato: 244 9XX XXX XXX).", 'error');
         return;
       }
 
@@ -629,7 +715,7 @@ function showContactSuccessFeedback(form) {
   }, 3000);
 }
 
-// FormataÃ§Ã£o automÃ¡tica de telefone
+// Formatação automática de telefone
 document.addEventListener('DOMContentLoaded', function() {
   const phoneInputs = document.querySelectorAll('#phoneNumber, #phone');
   phoneInputs.forEach(input => {
@@ -644,7 +730,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// AnimaÃ§Ãµes de entrada do contato
+// Animações de entrada do contato
 const contactObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -674,8 +760,8 @@ document.querySelectorAll(".form-input, .form-select, .form-textarea").forEach((
 // ================================
 // LOGS DE DESENVOLVIMENTO
 // ================================
-console.log('Sistema corrigido - Modal inicializado como escondido');
-console.log('Sistema de validaÃ§Ã£o de cliente carregado - Aceita CLI001 e nÃºmeros');
+console.log('Sistema atualizado - Modal inicializado como escondido');
+console.log('Sistema de validação de cliente carregado - Prefixo CLI automático');
 console.log('APIs esperadas:');
-console.log('- POST /api/validar-cliente.php - Validar nÃºmero do cliente');
+console.log('- POST /api/validar-cliente.php - Validar número do cliente');
 console.log('- POST /api/processar-pagamento.php - Processar pagamento Multicaixa');
